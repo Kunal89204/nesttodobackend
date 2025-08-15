@@ -7,7 +7,7 @@ import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://kunalkhandelwal108:Kunal892004@cluster0.5nmchek.mongodb.net/nestTodo'),
+    MongooseModule.forRoot(process.env.MONGODB_URI!),
     UsersModule,
     TodoModule,
   ],
