@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Todo } from './schemas/todo.schema';
 import { Model } from 'mongoose';
@@ -41,6 +41,27 @@ export class TodoService {
         success: true,
         message: 'Todo fetched successfully',
         data: todo,
+      };
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteTodoById(id: string) {
+    try {
+      if (!id) {
+        throw new BadRequestException('Todo Id is required');
+      }
+
+      const deletedTodo = await this.todoModel.findByIdAndDelete(id);
+
+      if (!deletedTodo) {
+        throw new BadRequestException("Can't delete todo");
+      }
+
+      return {
+        success: true,
+        message: 'Todo deleted succesfully',
       };
     } catch (error) {
       return error;

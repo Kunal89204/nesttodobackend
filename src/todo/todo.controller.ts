@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { TodoDto } from './dto/todo.dto';
 
@@ -19,5 +19,10 @@ export class TodoController {
   @Get(':id')
   getTodoForUserById(@Param('id') id: string) {
     return this.todoService.getTodoForUserById(id);
+  }
+
+  @Delete(':id')
+  deleteTodoById(@Param('id') id: string) {
+    return this.todoService.deleteTodoById(id);
   }
 }

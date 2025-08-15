@@ -4,6 +4,8 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { UserDto } from './dto/user.dto';
 
+
+
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
@@ -12,6 +14,7 @@ export class UsersService {
     const allUsers = await this.userModel.find();
     return allUsers;
   }
+
 
   async createUser(userData: UserDto) {
     try {
